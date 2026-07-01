@@ -40,7 +40,29 @@ pip install -r requirements.txt
 
 > **注意**：PyTorch 必须使用上述命令单独安装。推荐 CUDA 13.0，也可使用其他能正常调用 GPU 的 CUDA 版本。transformers 固定使用 5.8.1 版本。
 
-### 2. 数据预处理
+### 2. 下载预训练模型
+
+本项目使用 `bert-base-chinese` 作为基础模型，可通过以下任一方式下载：
+
+**方式一：从 Hugging Face 下载**
+```bash
+git clone https://huggingface.co/google-bert/bert-base-chinese
+```
+
+**方式二：使用 ModelScope CLI 下载**
+```bash
+modelscope download --model google-bert/bert-base-chinese --local_dir ./bert-base-chinese
+```
+
+**方式三：使用 ModelScope Python API 下载**
+```python
+from modelscope import snapshot_download
+model_dir = snapshot_download('google-bert/bert-base-chinese')
+```
+
+> **提示**：下载后需在 `config/config.yaml` 中配置正确的模型路径。
+
+### 3. 数据预处理
 
 准备 JSON 格式数据：
 
@@ -58,7 +80,7 @@ python -m src.core.data_preprocessing \
   --output data/
 ```
 
-### 3. 训练模型
+### 4. 训练模型
 
 ```bash
 # 使用默认配置
@@ -70,7 +92,7 @@ python -m src.core.train --batch_size 32 --learning_rate 0.0001
 
 配置文件位于 `config/config.yaml`，可修改模型参数、训练超参数等。
 
-### 4. 启动 API 服务
+### 5. 启动 API 服务
 
 ```bash
 python -m src.api.api
@@ -78,7 +100,7 @@ python -m src.api.api
 
 服务启动后访问 `http://localhost:8085/docs` 查看 API 文档。
 
-### 5. API 调用示例
+### 6. API 调用示例
 
 **单条预测**：
 ```bash
