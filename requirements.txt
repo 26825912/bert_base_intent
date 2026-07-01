@@ -1,0 +1,15 @@
+# 注意：PyTorch 需要单独安装，不在此文件中
+# 安装命令：pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu130
+
+transformers==5.8.1
+scikit-learn
+matplotlib
+seaborn
+pandas
+numpy
+tqdm
+fastapi
+uvicorn
+pydantic
+requests
+pyyaml

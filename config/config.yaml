@@ -1,0 +1,33 @@
+# BERT Intent Classification Configuration
+
+# Model settings
+model:
+  base_model_name: "bert-base-chinese"  # or path to local model
+  num_cls_layers: 6
+  hidden_dropout_prob: 0.1
+  label_smoothing: 0.1
+  use_layer_attention: true
+
+# Training settings
+training:
+  batch_size: 16
+  num_epochs: 1
+  learning_rate: 0.0003
+  warmup_steps: 500
+  max_length: 512
+  patience: 4  # early stopping patience
+  freeze_layers: 0  # number of BERT layers to freeze
+  seed: 42
+
+  # 权重损失函数配置（处理数据不均衡）
+  use_class_weights: false      # 是否启用类别权重（true启用，false使用标准损失）
+  weight_method: "effective"    # 权重方法: balanced/effective/sqrt/log
+  weight_beta: 0.99             # effective方法的beta参数（0.9-0.999）
+  max_weight: 50.0              # 最大权重限制（null表示不限制）
+
+# Paths (relative to project root)
+paths:
+  data_dir: 'C:\Users\ddf\Desktop\zzc\code\agent-intent-classification\intent_model_train\data_bert_revise2'
+  output_dir: 'D:\intent_model_weight\bert-base-chinese-data2-bs8-ep40-lr1e5-weight-20260630'
+  base_model_path: 'D:\intent_model_weight\bert-base-chinese'  # local path, or use model.base_model_name
+
